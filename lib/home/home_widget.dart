@@ -43,6 +43,20 @@ class _HomeWidgetState extends State<HomeWidget> {
             child: custom_widgets.DisplayFruits(
               width: double.infinity,
               height: double.infinity,
+              action: () async {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'You have chosen ${FFAppState().fruit}',
+                      style: TextStyle(
+                        color: FlutterFlowTheme.of(context).primaryText,
+                      ),
+                    ),
+                    duration: Duration(milliseconds: 4000),
+                    backgroundColor: Color(0x00000000),
+                  ),
+                );
+              },
             ),
           ),
         ),

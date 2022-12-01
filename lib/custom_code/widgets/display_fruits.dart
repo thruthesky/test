@@ -12,10 +12,12 @@ class DisplayFruits extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
+    required this.action,
   }) : super(key: key);
 
   final double? width;
   final double? height;
+  final Future<dynamic> Function() action;
 
   @override
   _DisplayFruitsState createState() => _DisplayFruitsState();

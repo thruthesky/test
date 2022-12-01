@@ -35,6 +35,8 @@ class FFAppState {
   int tabBarIndex = 1;
 
   List<String> fruits = ['Apple', 'Banana', 'Cherry', 'Durian'];
+
+  String fruit = '';
 }
 
 LatLng? _latLngFromString(String? val) {
