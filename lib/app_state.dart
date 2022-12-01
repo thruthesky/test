@@ -33,6 +33,8 @@ class FFAppState {
   DocumentReference? testPath = FirebaseFirestore.instance.doc('/test/abc');
 
   int tabBarIndex = 1;
+
+  List<String> fruits = ['Apple', 'Banana', 'Cherry', 'Durian'];
 }
 
 LatLng? _latLngFromString(String? val) {

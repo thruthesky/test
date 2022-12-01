@@ -68,49 +68,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? NavBarPage() : EntryWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : EntryWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : EntryWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : EntryWidget(),
           routes: [
             FFRoute(
               name: 'Home',
               path: 'home',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Home')
-                  : HomeWidget(),
+              builder: (context, params) => HomeWidget(),
             ),
             FFRoute(
               name: 'Entry',
               path: 'entry',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Entry')
-                  : EntryWidget(),
-            ),
-            FFRoute(
-              name: 'TestScreen',
-              path: 'testScreen',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'TestScreen')
-                  : TestScreenWidget(),
-            ),
-            FFRoute(
-              name: 'MapScreen',
-              path: 'mapScreen',
-              builder: (context, params) => MapScreenWidget(),
-            ),
-            FFRoute(
-              name: 'Email',
-              path: 'email',
-              builder: (context, params) => EmailWidget(),
-            ),
-            FFRoute(
-              name: 'Temp',
-              path: 'temp',
-              builder: (context, params) => TempWidget(),
+              builder: (context, params) => EntryWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
