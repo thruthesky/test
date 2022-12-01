@@ -1,5 +1,6 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,28 +37,13 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Builder(
-            builder: (context) {
-              final fruit = FFAppState().fruits.toList();
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                children: List.generate(fruit.length, (fruitIndex) {
-                  final fruitItem = fruit[fruitIndex];
-                  return Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    alignment: AlignmentDirectional(0, 0),
-                    child: Text(
-                      fruitItem,
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                  );
-                }),
-              );
-            },
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: custom_widgets.DisplayFruits(
+              width: double.infinity,
+              height: double.infinity,
+            ),
           ),
         ),
       ),
