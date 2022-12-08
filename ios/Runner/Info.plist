@@ -54,7 +54,8 @@
 	<true/>
 
 
-
+	<key>NSLocationWhenInUseUsageDescription</key>
+      <string>Sonub app requires location permission to let users search other users by location</string>
 
 
 	<key>UILaunchStoryboardName</key>
