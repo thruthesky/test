@@ -28,7 +28,19 @@ class _DisplayFruitsState extends State<DisplayFruits> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        for (final String fruit in FFAppState().fruits) Text(fruit),
+        for (final String fruit in FFAppState().fruits)
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => {
+              setState(() => FFAppState().fruit = fruit),
+              widget.action(),
+            },
+            child: Container(
+                width: double.infinity,
+                height: 100,
+                color: Colors.white,
+                child: Center(child: Text(fruit))),
+          ),
       ],
     );
   }
