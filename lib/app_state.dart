@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/lat_lng.dart';
 
-class FFAppState {
+class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
 
   factory FFAppState() {
@@ -20,23 +19,21 @@ class FFAppState {
 
   late SharedPreferences prefs;
 
-  bool setState = false;
+  String _userSearchTapIndex = '';
+  String get userSearchTapIndex => _userSearchTapIndex;
+  set userSearchTapIndex(String _value) {
+    notifyListeners();
 
-  DocumentReference? nullUserDocumentReference;
+    _userSearchTapIndex = _value;
+  }
 
-  String emptyString = '';
+  String _gender = '전체';
+  String get gender => _gender;
+  set gender(String _value) {
+    notifyListeners();
 
-  String nullBoolean = '';
-
-  int nullInteger = 0;
-
-  DocumentReference? testPath = FirebaseFirestore.instance.doc('/test/abc');
-
-  int tabBarIndex = 1;
-
-  List<String> fruits = ['Apple', 'Banana', 'Cherry', 'Durian'];
-
-  String fruit = '';
+    _gender = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

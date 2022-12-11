@@ -105,8 +105,8 @@ class ThemeTypography extends Typography {
   String get title2Family => 'Poppins';
   TextStyle get title2 => GoogleFonts.getFont(
         'Poppins',
-        color: theme.secondaryBackground,
-        fontWeight: FontWeight.normal,
+        color: theme.secondaryText,
+        fontWeight: FontWeight.w600,
         fontSize: 22,
       );
   String get title3Family => 'Poppins';
@@ -120,29 +120,29 @@ class ThemeTypography extends Typography {
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Poppins',
         color: theme.primaryText,
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        fontSize: 18,
       );
   String get subtitle2Family => 'Poppins';
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Poppins',
         color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
       );
   String get bodyText1Family => 'Poppins';
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Poppins',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
         fontSize: 14,
       );
   String get bodyText2Family => 'Poppins';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Poppins',
         color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
       );
 }
 
