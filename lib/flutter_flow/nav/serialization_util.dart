@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:from_css_color/from_css_color.dart';
 
 import '../../backend/backend.dart';
+import '../../backend/supabase/supabase.dart';
 import '../../flutter_flow/lat_lng.dart';
 import '../../flutter_flow/place.dart';
 
@@ -24,6 +25,19 @@ String placeToString(FFPlace place) => jsonEncode({
       'country': place.country,
       'zipCode': place.zipCode,
     });
+
+const _kDocIdDelimeter = '|';
+String _serializeDocumentReference(DocumentReference ref) {
+  final docIds = <String>[];
+  DocumentReference? currentRef = ref;
+  while (currentRef != null) {
+    docIds.add(currentRef.id);
+    // Get the parent document (catching any errors that arise).
+    currentRef = safeGet<DocumentReference?>(() => currentRef?.parent.parent);
+  }
+  // Reverse the list to get the correct ordering.
+  return docIds.reversed.join(_kDocIdDelimeter);
+}
 
 String? serializeParam(
   dynamic param,
@@ -64,9 +78,13 @@ String? serializeParam(
       case ParamType.JSON:
         return json.encode(param);
       case ParamType.DocumentReference:
-        return (param as DocumentReference).id;
+        return _serializeDocumentReference(param as DocumentReference);
       case ParamType.Document:
-        return (param as dynamic).reference.id;
+        final reference = (param as dynamic).reference as DocumentReference;
+        return _serializeDocumentReference(reference);
+
+      case ParamType.SupabaseRow:
+        return json.encode((param as SupabaseDataRow).data);
 
       default:
         return null;
@@ -127,6 +145,18 @@ FFPlace placeFromString(String placeStr) {
   );
 }
 
+DocumentReference _deserializeDocumentReference(
+  String refStr,
+  List<String> collectionNamePath,
+) {
+  var path = '';
+  final docIds = refStr.split(_kDocIdDelimeter);
+  for (int i = 0; i < docIds.length && i < collectionNamePath.length; i++) {
+    path += '/${collectionNamePath[i]}/${docIds[i]}';
+  }
+  return FirebaseFirestore.instance.doc(path);
+}
+
 enum ParamType {
   int,
   double,
@@ -140,13 +170,14 @@ enum ParamType {
   JSON,
   Document,
   DocumentReference,
+  SupabaseRow,
 }
 
 dynamic deserializeParam<T>(
   String? param,
   ParamType paramType,
   bool isList, [
-  String? collectionName,
+  List<String>? collectionNamePath,
 ]) {
   try {
     if (param == null) {
@@ -160,7 +191,8 @@ dynamic deserializeParam<T>(
       return paramValues
           .where((p) => p is String)
           .map((p) => p as String)
-          .map((p) => deserializeParam(p, paramType, false, collectionName))
+          .map((p) =>
+              deserializeParam<T>(p, paramType, false, collectionNamePath))
           .where((p) => p != null)
           .map((p) => p! as T)
           .toList();
@@ -190,7 +222,16 @@ dynamic deserializeParam<T>(
       case ParamType.JSON:
         return json.decode(param);
       case ParamType.DocumentReference:
-        return FirebaseFirestore.instance.doc('$collectionName/$param');
+        return _deserializeDocumentReference(param, collectionNamePath ?? []);
+
+      case ParamType.SupabaseRow:
+        final data = json.decode(param) as Map<String, dynamic>;
+        switch (T) {
+          case SonubpostsRow:
+            return SonubpostsRow(data);
+          default:
+            return null;
+        }
 
       default:
         return null;
@@ -202,17 +243,16 @@ dynamic deserializeParam<T>(
 }
 
 Future<dynamic> Function(String) getDoc(
-  String collectionName,
+  List<String> collectionNamePath,
   Serializer serializer,
 ) {
-  return (String id) => FirebaseFirestore.instance
-      .doc('$collectionName/$id')
+  return (String ids) => _deserializeDocumentReference(ids, collectionNamePath)
       .get()
       .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
 }
 
 Future<List<T>> Function(String) getDocList<T>(
-  String collectionName,
+  List<String> collectionNamePath,
   Serializer<T> serializer,
 ) {
   return (String idsList) {
@@ -223,8 +263,7 @@ Future<List<T>> Function(String) getDocList<T>(
     } catch (_) {}
     return Future.wait(
       docIds.map(
-        (id) => FirebaseFirestore.instance
-            .doc('$collectionName/$id')
+        (ids) => _deserializeDocumentReference(ids, collectionNamePath)
             .get()
             .then(
               (s) => serializers.deserializeWith(serializer, serializedData(s)),

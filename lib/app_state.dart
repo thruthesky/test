@@ -17,22 +17,17 @@ class FFAppState extends ChangeNotifier {
     prefs = await SharedPreferences.getInstance();
   }
 
-  late SharedPreferences prefs;
-
-  String _userSearchTapIndex = '';
-  String get userSearchTapIndex => _userSearchTapIndex;
-  set userSearchTapIndex(String _value) {
+  void update(VoidCallback callback) {
+    callback();
     notifyListeners();
-
-    _userSearchTapIndex = _value;
   }
 
-  String _gender = '전체';
-  String get gender => _gender;
-  set gender(String _value) {
-    notifyListeners();
+  late SharedPreferences prefs;
 
-    _gender = _value;
+  String _resultOfSayHi = '';
+  String get resultOfSayHi => _resultOfSayHi;
+  set resultOfSayHi(String _value) {
+    _resultOfSayHi = _value;
   }
 }
 

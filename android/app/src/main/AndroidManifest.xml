@@ -5,7 +5,7 @@
 
 
    <application
-        android:label="TEST"
+        android:label="일이tk"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">

@@ -9,8 +9,8 @@ import 'lat_lng.dart';
 import 'place.dart';
 import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../auth/auth_util.dart';
+import '../backend/supabase/supabase.dart';
 
-String? newCustomFunction() {
-  return "1";
+DocumentReference getUserRef(String uid) {
+  return FirebaseFirestore.instance.collection('users').doc(uid);
 }
