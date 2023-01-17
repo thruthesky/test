@@ -54,51 +54,37 @@ class _EntryWidgetState extends State<EntryWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FFButtonWidget(
-                onPressed: () async {
-                  context.pushNamed('KakaotalkLogin');
-                },
-                text: '카카오톡 로그인 - WebView',
-                options: FFButtonOptions(
-                  height: 40,
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await launchURL(
+                          'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin');
+                    },
+                    text: '카카오톡 로그인',
+                    options: FFButtonOptions(
+                      height: 40,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
                       ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                ],
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  await launchURL(
-                      'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin');
+                  context.pushNamed('LoginCallback');
                 },
-                text: '카카오톡 로그인 - New Window',
-                options: FFButtonOptions(
-                  height: 40,
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                      ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  await launchURL(
-                      'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin');
-                },
-                text: '카카오톡 로그인 - In App Browser',
+                text: 'Login Callback',
                 options: FFButtonOptions(
                   height: 40,
                   color: FlutterFlowTheme.of(context).primaryColor,
