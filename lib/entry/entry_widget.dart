@@ -46,88 +46,85 @@ class _EntryWidgetState extends State<EntryWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                  ),
-                  child: ClipRect(
-                    child: ImageFiltered(
-                      imageFilter: ImageFilter.blur(
-                        sigmaX: 3,
-                        sigmaY: 3,
-                      ),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Stack(
-                          children: [
-                            Image.network(
-                              'https://picsum.photos/seed/980/600',
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                            Lottie.asset(
-                              'assets/lottie_animations/92323-dot-pattern-background.json',
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 1,
-                              fit: BoxFit.cover,
-                              animate: true,
-                            ),
-                          ],
-                        ),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: ClipRect(
+                  child: ImageFiltered(
+                    imageFilter: ImageFilter.blur(
+                      sigmaX: 3,
+                      sigmaY: 3,
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: Stack(
+                        children: [
+                          Image.network(
+                            'https://picsum.photos/seed/980/600',
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                          Lottie.asset(
+                            'assets/lottie_animations/92323-dot-pattern-background.json',
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 1,
+                            fit: BoxFit.cover,
+                            animate: true,
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 64, 0, 0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              await launchURL(
-                                  'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin&state=${FFAppState().tempDocumentId}');
-                            },
-                            text: '카카오톡 아이디 로그인',
-                            options: FFButtonOptions(
-                              height: 40,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 128, 0, 0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            await launchURL(
+                                'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin&state=${FFAppState().tempDocumentId}');
+                          },
+                          text: '카카오톡 아이디 로그인',
+                          options: FFButtonOptions(
+                            height: 40,
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
                             ),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
