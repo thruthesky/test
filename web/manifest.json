@@ -1,6 +1,6 @@
 {
-    "name": "TEST",
-    "short_name": "TEST",
+    "name": "Login",
+    "short_name": "Login",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

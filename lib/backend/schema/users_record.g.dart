@@ -61,19 +61,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.gender;
-    if (value != null) {
-      result
-        ..add('gender')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.age;
-    if (value != null) {
-      result
-        ..add('age')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -120,14 +107,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
           result.phoneNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'gender':
-          result.gender = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
-        case 'age':
-          result.age = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int?;
-          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -155,10 +134,6 @@ class _$UsersRecord extends UsersRecord {
   @override
   final String? phoneNumber;
   @override
-  final String? gender;
-  @override
-  final int? age;
-  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -171,8 +146,6 @@ class _$UsersRecord extends UsersRecord {
       this.uid,
       this.createdTime,
       this.phoneNumber,
-      this.gender,
-      this.age,
       this.ffRef})
       : super._();
 
@@ -193,8 +166,6 @@ class _$UsersRecord extends UsersRecord {
         uid == other.uid &&
         createdTime == other.createdTime &&
         phoneNumber == other.phoneNumber &&
-        gender == other.gender &&
-        age == other.age &&
         ffRef == other.ffRef;
   }
 
@@ -204,17 +175,11 @@ class _$UsersRecord extends UsersRecord {
         $jc(
             $jc(
                 $jc(
-                    $jc(
-                        $jc(
-                            $jc(
-                                $jc($jc(0, email.hashCode),
-                                    displayName.hashCode),
-                                photoUrl.hashCode),
-                            uid.hashCode),
-                        createdTime.hashCode),
-                    phoneNumber.hashCode),
-                gender.hashCode),
-            age.hashCode),
+                    $jc($jc($jc(0, email.hashCode), displayName.hashCode),
+                        photoUrl.hashCode),
+                    uid.hashCode),
+                createdTime.hashCode),
+            phoneNumber.hashCode),
         ffRef.hashCode));
   }
 
@@ -227,8 +192,6 @@ class _$UsersRecord extends UsersRecord {
           ..add('uid', uid)
           ..add('createdTime', createdTime)
           ..add('phoneNumber', phoneNumber)
-          ..add('gender', gender)
-          ..add('age', age)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -261,14 +224,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   String? get phoneNumber => _$this._phoneNumber;
   set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
-  String? _gender;
-  String? get gender => _$this._gender;
-  set gender(String? gender) => _$this._gender = gender;
-
-  int? _age;
-  int? get age => _$this._age;
-  set age(int? age) => _$this._age = age;
-
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -286,8 +241,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _uid = $v.uid;
       _createdTime = $v.createdTime;
       _phoneNumber = $v.phoneNumber;
-      _gender = $v.gender;
-      _age = $v.age;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -317,8 +270,6 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             uid: uid,
             createdTime: createdTime,
             phoneNumber: phoneNumber,
-            gender: gender,
-            age: age,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

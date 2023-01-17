@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1036885997348:android:526c4dd3baa666e20725b1",
+        "android_client_info": {
+          "package_name": "com.mycompany.chatsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD58W3vqSBX4_0QJgC3Qx76wjRtDgoWZfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1036885997348-6pr89hfe43gbjmq483p034adbpfna8db.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.withcenter.team"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1036885997348:android:4c3818b70ea26b6b0725b1",
         "android_client_info": {
           "package_name": "com.mycompany.check"
@@ -159,6 +195,86 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1036885997348:android:5460afeb43a44eae0725b1",
+        "android_client_info": {
+          "package_name": "com.withcenter.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036885997348-920rpfqm3cs52ql5uofr571iiekfv24t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.withcenter.login",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD58W3vqSBX4_0QJgC3Qx76wjRtDgoWZfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1036885997348-6pr89hfe43gbjmq483p034adbpfna8db.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.withcenter.team"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036885997348:android:925f5d5ef77e22200725b1",
+        "android_client_info": {
+          "package_name": "com.withcenter.sonub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD58W3vqSBX4_0QJgC3Qx76wjRtDgoWZfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1036885997348-6pr89hfe43gbjmq483p034adbpfna8db.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.withcenter.team"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1036885997348:android:bb5f421e7d5c69b90725b1",
         "android_client_info": {
           "package_name": "com.withcenter.team"
@@ -170,6 +286,50 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.withcenter.team",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD58W3vqSBX4_0QJgC3Qx76wjRtDgoWZfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036885997348-t5udgf94m7ltkp8jsunk60m2jfh5da64.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1036885997348-6pr89hfe43gbjmq483p034adbpfna8db.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.withcenter.team"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036885997348:android:84c9d41b4c6667660725b1",
+        "android_client_info": {
+          "package_name": "space.cogitare.paginate_firestore_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036885997348-2akq03rdv9coemm96lb8bh03v9hpfnbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "space.cogitare.paginate_firestore_example",
             "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
           }
         },

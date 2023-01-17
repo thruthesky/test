@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:from_css_color/from_css_color.dart';
 
 import '../../backend/backend.dart';
-import '../../backend/supabase/supabase.dart';
+
 import '../../flutter_flow/lat_lng.dart';
 import '../../flutter_flow/place.dart';
+import '../../flutter_flow/local_file.dart';
 
 /// SERIALIZATION HELPERS
 
@@ -25,6 +26,8 @@ String placeToString(FFPlace place) => jsonEncode({
       'country': place.country,
       'zipCode': place.zipCode,
     });
+
+String localFileToString(FFLocalFile localFile) => localFile.serialize();
 
 const _kDocIdDelimeter = '|';
 String _serializeDocumentReference(DocumentReference ref) {
@@ -75,6 +78,8 @@ String? serializeParam(
         return (param as Color).toCssString();
       case ParamType.FFPlace:
         return placeToString(param as FFPlace);
+      case ParamType.FFLocalFile:
+        return localFileToString(param as FFLocalFile);
       case ParamType.JSON:
         return json.encode(param);
       case ParamType.DocumentReference:
@@ -82,9 +87,6 @@ String? serializeParam(
       case ParamType.Document:
         final reference = (param as dynamic).reference as DocumentReference;
         return _serializeDocumentReference(reference);
-
-      case ParamType.SupabaseRow:
-        return json.encode((param as SupabaseDataRow).data);
 
       default:
         return null;
@@ -145,6 +147,9 @@ FFPlace placeFromString(String placeStr) {
   );
 }
 
+FFLocalFile localFileFromString(String localFileStr) =>
+    FFLocalFile.deserialize(localFileStr);
+
 DocumentReference _deserializeDocumentReference(
   String refStr,
   List<String> collectionNamePath,
@@ -167,10 +172,10 @@ enum ParamType {
   LatLng,
   Color,
   FFPlace,
+  FFLocalFile,
   JSON,
   Document,
   DocumentReference,
-  SupabaseRow,
 }
 
 dynamic deserializeParam<T>(
@@ -219,19 +224,12 @@ dynamic deserializeParam<T>(
         return fromCssColor(param);
       case ParamType.FFPlace:
         return placeFromString(param);
+      case ParamType.FFLocalFile:
+        return localFileFromString(param);
       case ParamType.JSON:
         return json.decode(param);
       case ParamType.DocumentReference:
         return _deserializeDocumentReference(param, collectionNamePath ?? []);
-
-      case ParamType.SupabaseRow:
-        final data = json.decode(param) as Map<String, dynamic>;
-        switch (T) {
-          case SonubpostsRow:
-            return SonubpostsRow(data);
-          default:
-            return null;
-        }
 
       default:
         return null;

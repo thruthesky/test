@@ -1,5 +1,7 @@
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
 
@@ -14,6 +16,16 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
+Future<int> queryUsersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UsersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<UsersRecord>> queryUsersRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -54,6 +66,22 @@ Future<FFFirestorePage<UsersRecord>> queryUsersRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+Future<int> queryCollectionCount(
+  Query collection, {
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) {
+  final builder = queryBuilder ?? (q) => q;
+  var query = builder(collection);
+  if (limit > 0) {
+    query = query.limit(limit);
+  }
+
+  return query.count().get().catchError((err) {
+    print('Error querying $collection: $err');
+  }).then((value) => value.count);
+}
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,
@@ -158,4 +186,27 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
   final dataStream = docSnapshotStream?.map(getDocs);
   final nextPageToken = docSnapshot.docs.isEmpty ? null : docSnapshot.docs.last;
   return FFFirestorePage(data, dataStream, nextPageToken);
+}
+
+// Creates a Firestore document representing the logged in user if it doesn't yet exist
+Future maybeCreateUser(User user) async {
+  final userRecord = UsersRecord.collection.doc(user.uid);
+  final userExists = await userRecord.get().then((u) => u.exists);
+  if (userExists) {
+    currentUserDocument = await UsersRecord.getDocumentOnce(userRecord);
+    return;
+  }
+
+  final userData = createUsersRecordData(
+    email: user.email,
+    displayName: user.displayName,
+    photoUrl: user.photoURL,
+    uid: user.uid,
+    phoneNumber: user.phoneNumber,
+    createdTime: getCurrentTimestamp,
+  );
+
+  await userRecord.set(userData);
+  currentUserDocument =
+      serializers.deserializeWith(UsersRecord.serializer, userData);
 }

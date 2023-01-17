@@ -1,10 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'backend/supabase/supabase.dart';
+import 'auth/firebase_user_provider.dart';
+import 'auth/auth_util.dart';
+
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -15,15 +15,10 @@ import 'index.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initFirebase();
-  await SupaFlow.initialize();
+
   await FlutterFlowTheme.initialize();
 
-  final appState = FFAppState(); // Initialize FFAppState
-
-  runApp(ChangeNotifierProvider(
-    create: (context) => appState,
-    child: MyApp(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -39,14 +34,32 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
+  late Stream<LoginFirebaseUser> userStream;
+
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
+
+  final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
   void initState() {
     super.initState();
     _appStateNotifier = AppStateNotifier();
     _router = createRouter(_appStateNotifier);
+    userStream = loginFirebaseUserStream()
+      ..listen((user) => _appStateNotifier.update(user));
+    jwtTokenStream.listen((_) {});
+    Future.delayed(
+      Duration(seconds: 1),
+      () => _appStateNotifier.stopShowingSplashImage(),
+    );
+  }
+
+  @override
+  void dispose() {
+    authUserSub.cancel();
+
+    super.dispose();
   }
 
   void setLocale(String language) {
@@ -61,7 +74,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'TEST',
+      title: 'Login',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

@@ -1,4 +1,4 @@
-package com.mycompany.test
+package com.withcenter.login
 
 import io.flutter.embedding.android.FlutterActivity
 
