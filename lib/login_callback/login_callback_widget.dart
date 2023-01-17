@@ -1,23 +1,32 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_web_view.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class KakaotalkLoginWidget extends StatefulWidget {
-  const KakaotalkLoginWidget({Key? key}) : super(key: key);
+class LoginCallbackWidget extends StatefulWidget {
+  const LoginCallbackWidget({Key? key}) : super(key: key);
 
   @override
-  _KakaotalkLoginWidgetState createState() => _KakaotalkLoginWidgetState();
+  _LoginCallbackWidgetState createState() => _LoginCallbackWidgetState();
 }
 
-class _KakaotalkLoginWidgetState extends State<KakaotalkLoginWidget> {
+class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.loginWithCustomAuthToken(
+        context,
+        FFAppState().tempDocumentId,
+      );
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -30,6 +39,8 @@ class _KakaotalkLoginWidgetState extends State<KakaotalkLoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -37,7 +48,7 @@ class _KakaotalkLoginWidgetState extends State<KakaotalkLoginWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          'Page Title',
+          'Login ...',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -51,21 +62,14 @@ class _KakaotalkLoginWidgetState extends State<KakaotalkLoginWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
-            ),
-            child: FlutterFlowWebView(
-              url:
-                  'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin',
-              bypass: false,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 1,
-              verticalScroll: false,
-              horizontalScroll: false,
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                FFAppState().tempDocumentId,
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ],
           ),
         ),
       ),

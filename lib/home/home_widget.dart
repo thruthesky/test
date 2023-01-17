@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -31,6 +32,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -78,6 +81,36 @@ class _HomeWidgetState extends State<HomeWidget> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
+              Text(
+                'Welcome',
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+              AuthUserStreamWidget(
+                builder: (context) => Text(
+                  currentUserDisplayName,
+                  style: FlutterFlowTheme.of(context).bodyText1,
+                ),
+              ),
+              Text(
+                currentUserUid,
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+              if (currentUserPhoto != null && currentUserPhoto != '')
+                AuthUserStreamWidget(
+                  builder: (context) => Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Image.network(
+                      currentUserPhoto,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

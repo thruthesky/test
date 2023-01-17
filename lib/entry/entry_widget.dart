@@ -1,8 +1,11 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EntryWidget extends StatefulWidget {
   const EntryWidget({Key? key}) : super(key: key);
@@ -12,12 +15,18 @@ class EntryWidget extends StatefulWidget {
 }
 
 class _EntryWidgetState extends State<EntryWidget> {
+  String? tempDocumentId;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      tempDocumentId = await actions.createTempDocument();
+      FFAppState().tempDocumentId = tempDocumentId!;
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -30,6 +39,8 @@ class _EntryWidgetState extends State<EntryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -54,51 +65,37 @@ class _EntryWidgetState extends State<EntryWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FFButtonWidget(
-                onPressed: () async {
-                  context.pushNamed('KakaotalkLogin');
-                },
-                text: '카카오톡 로그인 - WebView',
-                options: FFButtonOptions(
-                  height: 40,
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await launchURL(
+                          'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin&state=${FFAppState().tempDocumentId}');
+                    },
+                    text: '카카오톡 로그인',
+                    options: FFButtonOptions(
+                      height: 40,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
                       ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                ],
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  await launchURL(
-                      'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin');
+                  context.pushNamed('LoginCallback');
                 },
-                text: '카카오톡 로그인 - New Window',
-                options: FFButtonOptions(
-                  height: 40,
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                      ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  await launchURL(
-                      'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin');
-                },
-                text: '카카오톡 로그인 - In App Browser',
+                text: 'Login Callback',
                 options: FFButtonOptions(
                   height: 40,
                   color: FlutterFlowTheme.of(context).primaryColor,
