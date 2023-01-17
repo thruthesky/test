@@ -4,14 +4,10 @@ import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginCallbackWidget extends StatefulWidget {
-  const LoginCallbackWidget({
-    Key? key,
-    this.tempDocumentId,
-  }) : super(key: key);
-
-  final String? tempDocumentId;
+  const LoginCallbackWidget({Key? key}) : super(key: key);
 
   @override
   _LoginCallbackWidgetState createState() => _LoginCallbackWidgetState();
@@ -27,7 +23,8 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.loginWithCustomAuthToken(
-        widget.tempDocumentId!,
+        context,
+        FFAppState().tempDocumentId,
       );
     });
 
@@ -42,6 +39,8 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -67,7 +66,7 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Text(
-                widget.tempDocumentId!,
+                FFAppState().tempDocumentId,
                 style: FlutterFlowTheme.of(context).bodyText1,
               ),
             ],

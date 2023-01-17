@@ -95,10 +95,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'LoginCallback',
               path: 'loginCallback',
-              builder: (context, params) => LoginCallbackWidget(
-                tempDocumentId:
-                    params.getParam('tempDocumentId', ParamType.String),
-              ),
+              builder: (context, params) => LoginCallbackWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

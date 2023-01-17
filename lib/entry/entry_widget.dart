@@ -5,6 +5,7 @@ import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EntryWidget extends StatefulWidget {
   const EntryWidget({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class EntryWidget extends StatefulWidget {
 }
 
 class _EntryWidgetState extends State<EntryWidget> {
-  String? tempId;
+  String? tempDocumentId;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -23,7 +24,8 @@ class _EntryWidgetState extends State<EntryWidget> {
     super.initState();
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      tempId = await actions.createTempDocument();
+      tempDocumentId = await actions.createTempDocument();
+      FFAppState().tempDocumentId = tempDocumentId!;
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -37,6 +39,8 @@ class _EntryWidgetState extends State<EntryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -67,7 +71,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       await launchURL(
-                          'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin&state=${tempId}');
+                          'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin&state=${FFAppState().tempDocumentId}');
                     },
                     text: '카카오톡 로그인',
                     options: FFButtonOptions(
