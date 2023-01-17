@@ -1,10 +1,17 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginCallbackWidget extends StatefulWidget {
-  const LoginCallbackWidget({Key? key}) : super(key: key);
+  const LoginCallbackWidget({
+    Key? key,
+    this.tempDocumentId,
+  }) : super(key: key);
+
+  final String? tempDocumentId;
 
   @override
   _LoginCallbackWidgetState createState() => _LoginCallbackWidgetState();
@@ -17,6 +24,12 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.loginWithCustomAuthToken(
+        widget.tempDocumentId!,
+      );
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -52,7 +65,12 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Text(
+                widget.tempDocumentId!,
+                style: FlutterFlowTheme.of(context).bodyText1,
+              ),
+            ],
           ),
         ),
       ),

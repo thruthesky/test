@@ -93,19 +93,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomeWidget(),
             ),
             FFRoute(
-              name: 'KakaotalkLogin',
-              path: 'kakaotalkLogin',
-              builder: (context, params) => KakaotalkLoginWidget(),
-            ),
-            FFRoute(
-              name: 'KakaoLoginInAppBrowser',
-              path: 'kakaoLoginInAppBrowser',
-              builder: (context, params) => KakaoLoginInAppBrowserWidget(),
-            ),
-            FFRoute(
               name: 'LoginCallback',
               path: 'loginCallback',
-              builder: (context, params) => LoginCallbackWidget(),
+              builder: (context, params) => LoginCallbackWidget(
+                tempDocumentId:
+                    params.getParam('tempDocumentId', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
