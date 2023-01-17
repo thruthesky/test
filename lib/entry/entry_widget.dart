@@ -106,7 +106,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                           text: '카카오톡 아이디 로그인',
                           options: FFButtonOptions(
                             height: 40,
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color: Color(0x8D4B39EF),
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'Poppins',
@@ -118,6 +118,13 @@ class _EntryWidgetState extends State<EntryWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
+                        child: Text(
+                          '추억의 출석부 놀이',
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
                     ],
