@@ -91,6 +91,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'KakaotalkLogin',
               path: 'kakaotalkLogin',
               builder: (context, params) => KakaotalkLoginWidget(),
+            ),
+            FFRoute(
+              name: 'KakaoLoginInAppBrowser',
+              path: 'kakaoLoginInAppBrowser',
+              builder: (context, params) => KakaoLoginInAppBrowserWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
