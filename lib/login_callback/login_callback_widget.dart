@@ -4,6 +4,7 @@ import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class LoginCallbackWidget extends StatefulWidget {
@@ -48,7 +49,7 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: false,
         title: Text(
-          'Login ...',
+          '로그인 중입니다.',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: Colors.white,
@@ -62,14 +63,39 @@ class _LoginCallbackWidgetState extends State<LoginCallbackWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Text(
-                FFAppState().tempDocumentId,
-                style: FlutterFlowTheme.of(context).bodyText1,
-              ),
-            ],
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 64, 0, 0),
+                  child: Lottie.asset(
+                    'assets/lottie_animations/93686-user-icon-animate.json',
+                    width: 80,
+                    height: 200,
+                    fit: BoxFit.cover,
+                    animate: true,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
+                  child: Text(
+                    '로그인 중입니다.\n잠시만 기다려 주세요.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.getFont(
+                      'Roboto',
+                      fontWeight: FontWeight.w300,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
