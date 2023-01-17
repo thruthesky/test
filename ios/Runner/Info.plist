@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>login.com</string>
+        <string>login</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>login</string>
+        <string>com.withcenter.login</string>
         </array>
         </dict>
     </array>

@@ -24,10 +24,10 @@
 @import firebase_core;
 #endif
 
-#if __has_include(<flutter_inappwebview/InAppWebViewFlutterPlugin.h>)
-#import <flutter_inappwebview/InAppWebViewFlutterPlugin.h>
+#if __has_include(<firebase_dynamic_links/FLTFirebaseDynamicLinksPlugin.h>)
+#import <firebase_dynamic_links/FLTFirebaseDynamicLinksPlugin.h>
 #else
-@import flutter_inappwebview;
+@import firebase_dynamic_links;
 #endif
 
 #if __has_include(<google_sign_in_ios/FLTGoogleSignInPlugin.h>)
@@ -78,7 +78,7 @@
   [FLTFirebaseFirestorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseFirestorePlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
-  [InAppWebViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"InAppWebViewFlutterPlugin"]];
+  [FLTFirebaseDynamicLinksPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseDynamicLinksPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
