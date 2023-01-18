@@ -100,8 +100,9 @@ class _EntryWidgetState extends State<EntryWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 128, 0, 0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            await launchURL(
-                                'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d4b43fbf2599b19b50ef43b3524f0165&redirect_uri=https%3A%2F%2Fasia-northeast3-withcenter-project.cloudfunctions.net%2FkakaoLogin&state=${FFAppState().tempDocumentId}');
+                            await actions.launchKakaoLogin(
+                              FFAppState().tempDocumentId,
+                            );
                           },
                           text: '카카오톡 아이디 로그인',
                           options: FFButtonOptions(
