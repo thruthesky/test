@@ -123,7 +123,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 32, 0, 0),
                         child: Text(
-                          '추억의 출석부 놀이',
+                          '추억의 출석부 놀이 - 1.0',
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
