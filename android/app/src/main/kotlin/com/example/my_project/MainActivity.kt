@@ -1,4 +1,4 @@
-package com.withcenter.login
+package com.withcenter.myapp
 
 import io.flutter.embedding.android.FlutterActivity
 
