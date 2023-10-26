@@ -160,7 +160,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qv2s57g2': {
       'ko': '홈즈',
-      'en': 'holmes',
+      'en': 'Homes',
     },
   },
   // Profile

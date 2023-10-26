@@ -152,16 +152,16 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).tertiary,
         selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
-        selectedBackgroundColor: Color(0x00000000),
+        unselectedItemColor: FlutterFlowTheme.of(context).secondary,
+        selectedBackgroundColor: Colors.transparent,
         borderRadius: 0.0,
         itemBorderRadius: 8.0,
         margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         width: double.infinity,
-        elevation: 1.0,
+        elevation: 0.0,
         items: [
           FloatingNavbarItem(
             customWidget: Column(
@@ -171,7 +171,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icons.search_sharp,
                   color: currentIndex == 0
                       ? FlutterFlowTheme.of(context).primary
-                      : FlutterFlowTheme.of(context).secondaryText,
+                      : FlutterFlowTheme.of(context).secondary,
                   size: 24.0,
                 ),
                 Text(
@@ -182,7 +182,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   style: TextStyle(
                     color: currentIndex == 0
                         ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
+                        : FlutterFlowTheme.of(context).secondary,
                     fontSize: 11.0,
                   ),
                 ),
@@ -197,7 +197,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icons.favorite_border_rounded,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
-                      : FlutterFlowTheme.of(context).secondaryText,
+                      : FlutterFlowTheme.of(context).secondary,
                   size: 24.0,
                 ),
                 Text(
@@ -208,7 +208,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   style: TextStyle(
                     color: currentIndex == 1
                         ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
+                        : FlutterFlowTheme.of(context).secondary,
                     fontSize: 11.0,
                   ),
                 ),
@@ -223,7 +223,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   Icons.person_outline,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
-                      : FlutterFlowTheme.of(context).secondaryText,
+                      : FlutterFlowTheme.of(context).secondary,
                   size: 24.0,
                 ),
                 Text(
@@ -234,7 +234,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   style: TextStyle(
                     color: currentIndex == 2
                         ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
+                        : FlutterFlowTheme.of(context).secondary,
                     fontSize: 11.0,
                   ),
                 ),
