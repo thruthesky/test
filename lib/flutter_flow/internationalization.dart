@@ -165,19 +165,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Profile
   {
-    'lrvu62qn': {
+    'wsqmdb9t': {
       'ko': '이름',
       'en': '',
     },
-    'mpktmq9h': {
+    'ijmhu89s': {
       'ko': '',
       'en': '',
     },
-    'fms13vrd': {
+    'ye1p2xec': {
       'ko': '이름 입력하세요.',
       'en': '',
     },
-    '0qj538bo': {
+    '96ro2f88': {
       'ko': '저장',
       'en': '',
     },

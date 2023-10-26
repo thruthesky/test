@@ -1,12 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/components/user_avatar_big_widget.dart';
 import '/components/user_avatar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/actions/actions.dart' as action_blocks;
+import '/flutter_flow/upload_data.dart';
 import 'profile_widget.dart' show ProfileWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,16 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   final unfocusNode = FocusNode();
   // Model for UserAvatarBig component.
   late UserAvatarBigModel userAvatarBigModel;
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl1 = '';
+
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
+
   // State field(s) for displayName widget.
   FocusNode? displayNameFocusNode;
   TextEditingController? displayNameController;

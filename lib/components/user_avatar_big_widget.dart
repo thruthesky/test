@@ -12,10 +12,12 @@ class UserAvatarBigWidget extends StatefulWidget {
   const UserAvatarBigWidget({
     Key? key,
     double? size,
+    required this.onTap,
   })  : this.size = size ?? 160.0,
         super(key: key);
 
   final double size;
+  final Future<dynamic> Function()? onTap;
 
   @override
   _UserAvatarBigWidgetState createState() => _UserAvatarBigWidgetState();

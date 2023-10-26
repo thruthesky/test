@@ -1,12 +1,13 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/backend/firebase_storage/storage.dart';
 import '/components/user_avatar_big_widget.dart';
 import '/components/user_avatar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/actions/actions.dart' as action_blocks;
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -119,13 +120,81 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  await action_blocks
-                                      .uploadProfilePhotoAction(context);
+                                  final selectedMedia =
+                                      await selectMediaWithSourceBottomSheet(
+                                    context: context,
+                                    maxWidth: 400.00,
+                                    maxHeight: 400.00,
+                                    imageQuality: 90,
+                                    allowPhoto: true,
+                                  );
+                                  if (selectedMedia != null &&
+                                      selectedMedia.every((m) =>
+                                          validateFileFormat(
+                                              m.storagePath, context))) {
+                                    setState(
+                                        () => _model.isDataUploading1 = true);
+                                    var selectedUploadedFiles =
+                                        <FFUploadedFile>[];
+
+                                    var downloadUrls = <String>[];
+                                    try {
+                                      showUploadMessage(
+                                        context,
+                                        'Uploading file...',
+                                        showLoading: true,
+                                      );
+                                      selectedUploadedFiles = selectedMedia
+                                          .map((m) => FFUploadedFile(
+                                                name: m.storagePath
+                                                    .split('/')
+                                                    .last,
+                                                bytes: m.bytes,
+                                                height: m.dimensions?.height,
+                                                width: m.dimensions?.width,
+                                                blurHash: m.blurHash,
+                                              ))
+                                          .toList();
+
+                                      downloadUrls = (await Future.wait(
+                                        selectedMedia.map(
+                                          (m) async => await uploadData(
+                                              m.storagePath, m.bytes),
+                                        ),
+                                      ))
+                                          .where((u) => u != null)
+                                          .map((u) => u!)
+                                          .toList();
+                                    } finally {
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                      _model.isDataUploading1 = false;
+                                    }
+                                    if (selectedUploadedFiles.length ==
+                                            selectedMedia.length &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
+                                      setState(() {
+                                        _model.uploadedLocalFile1 =
+                                            selectedUploadedFiles.first;
+                                        _model.uploadedFileUrl1 =
+                                            downloadUrls.first;
+                                      });
+                                      showUploadMessage(context, 'Success!');
+                                    } else {
+                                      setState(() {});
+                                      showUploadMessage(
+                                          context, 'Failed to upload data');
+                                      return;
+                                    }
+                                  }
                                 },
                                 child: wrapWithModel(
                                   model: _model.userAvatarBigModel,
                                   updateCallback: () => setState(() {}),
-                                  child: UserAvatarBigWidget(),
+                                  child: UserAvatarBigWidget(
+                                    onTap: () async {},
+                                  ),
                                 ),
                               ),
                               Align(
@@ -144,8 +213,74 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     size: 24.0,
                                   ),
                                   onPressed: () async {
-                                    await action_blocks
-                                        .uploadProfilePhotoAction(context);
+                                    final selectedMedia =
+                                        await selectMediaWithSourceBottomSheet(
+                                      context: context,
+                                      maxWidth: 400.00,
+                                      maxHeight: 400.00,
+                                      imageQuality: 90,
+                                      allowPhoto: true,
+                                    );
+                                    if (selectedMedia != null &&
+                                        selectedMedia.every((m) =>
+                                            validateFileFormat(
+                                                m.storagePath, context))) {
+                                      setState(
+                                          () => _model.isDataUploading2 = true);
+                                      var selectedUploadedFiles =
+                                          <FFUploadedFile>[];
+
+                                      var downloadUrls = <String>[];
+                                      try {
+                                        showUploadMessage(
+                                          context,
+                                          'Uploading file...',
+                                          showLoading: true,
+                                        );
+                                        selectedUploadedFiles = selectedMedia
+                                            .map((m) => FFUploadedFile(
+                                                  name: m.storagePath
+                                                      .split('/')
+                                                      .last,
+                                                  bytes: m.bytes,
+                                                  height: m.dimensions?.height,
+                                                  width: m.dimensions?.width,
+                                                  blurHash: m.blurHash,
+                                                ))
+                                            .toList();
+
+                                        downloadUrls = (await Future.wait(
+                                          selectedMedia.map(
+                                            (m) async => await uploadData(
+                                                m.storagePath, m.bytes),
+                                          ),
+                                        ))
+                                            .where((u) => u != null)
+                                            .map((u) => u!)
+                                            .toList();
+                                      } finally {
+                                        ScaffoldMessenger.of(context)
+                                            .hideCurrentSnackBar();
+                                        _model.isDataUploading2 = false;
+                                      }
+                                      if (selectedUploadedFiles.length ==
+                                              selectedMedia.length &&
+                                          downloadUrls.length ==
+                                              selectedMedia.length) {
+                                        setState(() {
+                                          _model.uploadedLocalFile2 =
+                                              selectedUploadedFiles.first;
+                                          _model.uploadedFileUrl2 =
+                                              downloadUrls.first;
+                                        });
+                                        showUploadMessage(context, 'Success!');
+                                      } else {
+                                        setState(() {});
+                                        showUploadMessage(
+                                            context, 'Failed to upload data');
+                                        return;
+                                      }
+                                    }
                                   },
                                 ),
                               ),
@@ -159,7 +294,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           EdgeInsetsDirectional.fromSTEB(8.0, 64.0, 0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
-                          'lrvu62qn' /* 이름 */,
+                          'wsqmdb9t' /* 이름 */,
                         ),
                         style: FlutterFlowTheme.of(context).labelSmall,
                       ),
@@ -177,7 +312,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintText: FFLocalizations.of(context).getText(
-                              'fms13vrd' /* 이름 입력하세요. */,
+                              'ye1p2xec' /* 이름 입력하세요. */,
                             ),
                             hintStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
@@ -237,7 +372,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ));
                           },
                           text: FFLocalizations.of(context).getText(
-                            '0qj538bo' /* 저장 */,
+                            '96ro2f88' /* 저장 */,
                           ),
                           options: FFButtonOptions(
                             height: 40.0,
