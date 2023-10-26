@@ -132,9 +132,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   .getText(
                                                 'edgqryxv' /* 여행지 검색 */,
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodySmall,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodySmall
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    fontSize: 13.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -146,7 +151,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 11.0,
+                                                        ),
                                               ),
                                             ),
                                           ],
@@ -182,7 +192,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Container(
                       width: double.infinity,
-                      height: 80.0,
+                      height: 60.0,
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                       ),
@@ -220,7 +230,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   listViewCategoriesRecordList[listViewIndex];
                               return Container(
                                 width: 80.0,
-                                height: 80.0,
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
                                 ),
@@ -239,15 +248,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             0.0, 8.0, 0.0, 0.0),
                                         child: Text(
                                           listViewCategoriesRecord.name,
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 8.0, 0.0, 0.0),
-                                        child: Text(
-                                          listViewCategoriesRecord.id,
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
