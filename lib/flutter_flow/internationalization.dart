@@ -165,6 +165,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Profile
   {
+    'lrvu62qn': {
+      'ko': '이름',
+      'en': '',
+    },
+    'mpktmq9h': {
+      'ko': '',
+      'en': '',
+    },
+    'fms13vrd': {
+      'ko': '이름 입력하세요.',
+      'en': '',
+    },
+    '0qj538bo': {
+      'ko': '저장',
+      'en': '',
+    },
     'mrlmfwk7': {
       'ko': '회원 정보',
       'en': 'Profile',
@@ -187,6 +203,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Miscellaneous
   {
+    'lyc4jh7h': {
+      'ko': 'Label here...',
+      'en': '',
+    },
     'unyiz9nr': {
       'ko': '',
       'en': '',

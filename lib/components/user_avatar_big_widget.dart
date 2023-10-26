@@ -5,24 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'user_avatar_model.dart';
-export 'user_avatar_model.dart';
+import 'user_avatar_big_model.dart';
+export 'user_avatar_big_model.dart';
 
-class UserAvatarWidget extends StatefulWidget {
-  const UserAvatarWidget({
+class UserAvatarBigWidget extends StatefulWidget {
+  const UserAvatarBigWidget({
     Key? key,
     double? size,
-  })  : this.size = size ?? 56.0,
+  })  : this.size = size ?? 160.0,
         super(key: key);
 
   final double size;
 
   @override
-  _UserAvatarWidgetState createState() => _UserAvatarWidgetState();
+  _UserAvatarBigWidgetState createState() => _UserAvatarBigWidgetState();
 }
 
-class _UserAvatarWidgetState extends State<UserAvatarWidget> {
-  late UserAvatarModel _model;
+class _UserAvatarBigWidgetState extends State<UserAvatarBigWidget> {
+  late UserAvatarBigModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -33,7 +33,7 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => UserAvatarModel());
+    _model = createModel(context, () => UserAvatarBigModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -60,6 +60,7 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget> {
         height: widget.size,
         decoration: BoxDecoration(
           color: Colors.transparent,
+          borderRadius: BorderRadius.circular(0.0),
         ),
         child: Stack(
           children: [
@@ -68,9 +69,11 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(6.0, 6.0, 6.0, 6.0),
                 child: AuthUserStreamWidget(
                   builder: (context) => ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(52.0),
                     child: Image.network(
                       'https://picsum.photos/seed/374/600',
+                      width: widget.size,
+                      height: widget.size,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -84,15 +87,15 @@ class _UserAvatarWidgetState extends State<UserAvatarWidget> {
                     width: widget.size,
                     height: widget.size,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondary,
-                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0x7C6E6E6E),
+                      borderRadius: BorderRadius.circular(52.0),
                     ),
                     child: Align(
                       alignment: AlignmentDirectional(0.00, 0.00),
                       child: Icon(
                         Icons.person_sharp,
                         color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 24.0,
+                        size: 64.0,
                       ),
                     ),
                   ),
